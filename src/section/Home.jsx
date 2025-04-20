@@ -5,10 +5,10 @@ import Contact from "./Contact";
 const Home = () => {
   return (
     <section className="min-h-screen bg-midnight">
-      <section>
+      <section className="">
         <Hero />
       </section>
-      <section>
+      <section className="mt-15">
         <About />
       </section>
       <section>
