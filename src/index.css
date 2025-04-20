@@ -1,1 +1,61 @@
 @import "tailwindcss";
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .bg-midnight {
+    background-color: #0f172a;
+  }
+
+  .bg-midnight-surface {
+    background-color: #1e293b;
+  }
+
+  .bg-navy-gradient {
+    background-image: linear-gradient(
+      to bottom right,
+      #0f172a,
+      #1e293b,
+      #0f172a
+    );
+  }
+
+  .text-slate-100 {
+    color: #f1f5f9;
+  }
+
+  .text-slate-400 {
+    color: #94a3b8;
+  }
+
+  .text-blue-accent {
+    color: #3b82f6;
+  }
+
+  /* Border */
+  .border-slate-deep {
+    border-color: #334155;
+  }
+
+  /* Button style */
+  .btn-navy {
+    background-color: #2563eb;
+  }
+
+  .btn-navy:hover {
+    background-color: #3b82f6;
+  }
+
+  .fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+}

@@ -4,9 +4,8 @@ import About from "./About";
 import Contact from "./Contact";
 const Home = () => {
   return (
-    <section className="bg-green-400">
-      <p>home</p>
-      {/* <section>
+    <section className="min-h-screen bg-midnight">
+      <section>
         <Hero />
       </section>
       <section>
@@ -14,7 +13,7 @@ const Home = () => {
       </section>
       <section>
         <Contact />
-      </section> */}
+      </section>
     </section>
   );
 };
