@@ -9,7 +9,7 @@ const About = () => {
       ref={ref}
       className={`w-full bg-midnight flex flex-col items-center justify-center
       max-sm:p-5 transition-opacity duration-1000 ease-in-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-100"
       } `}
     >
       <h2 className="font-bold text-2xl text-white max-sm:mr-10 max-sm:mb-3 ">
