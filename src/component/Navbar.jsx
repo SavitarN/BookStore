@@ -31,6 +31,7 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
+      <div className="absolute sm:hidden">&times</div>
     </nav>
   );
 };

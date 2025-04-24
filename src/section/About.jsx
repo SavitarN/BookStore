@@ -10,14 +10,14 @@ const About = () => {
       className={`w-full bg-midnight flex flex-col items-center justify-center
       max-sm:p-5 transition-opacity duration-1000 ease-in-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-100"
-      } `}
+      }  px-15`}
     >
-      <h2 className="font-bold text-2xl text-white max-sm:mr-10 max-sm:mb-3 ">
+      <h2 className="font-bold text-2xl text-white max-sm:text-center max-sm:mb-3 ">
         Overview
       </h2>
       <div className="w-full flex justify-around items-center max-sm:flex-col gap-6 ">
-        <div className="w-[40%]  flex items-center">
-          <p className="text-white text-lg mx-auto leading-relaxed max-sm:w-">
+        <div className="w-[40%]  flex items-center max-sm:w-full max-sm:text-center">
+          <p className="text-white text-lg mx-auto leading-relaxed max-sm:">
             Welcome to BookStore, where passion for books meets the joy of
             reading. Whether you’re a casual reader or a dedicated bookworm, we
             have a vast collection waiting for you. Our mission is to inspire

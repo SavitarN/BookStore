@@ -8,7 +8,7 @@ const Home = () => {
       <section className="">
         <Hero />
       </section>
-      <section className="mt-15">
+      <section id="about" className="mt-15">
         <About />
       </section>
       <section className="mt-20">
