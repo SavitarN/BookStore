@@ -5,9 +5,9 @@ export const formSchema = z
         username: z.string().min(1, "Username is required"),
         email: z.string().email("Invalid email"),
         password: z.string().min(6, "Password must be at least 6 characters"),
-        "confirm-password": z.string(),
+        "confirmPassword": z.string(),
     })
-    .refine((data) => data.password === data["confirmPassword"], {
-        path: ["confirm-password"],
+    .refine((data) => data.password === data.confirmPassword, {
+        path: ["confirmPassword"],
         message: "Passwords do not match",
     });
