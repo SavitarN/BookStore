@@ -7,35 +7,34 @@ export const AuthContext = createContext();
 //provided the value to context//
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
-
+  console.log(userData);
   const [registered, setIsRegistered] = useState(false);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
 
   console.log(userData[0]?.username);
   console.log(userData[0]?.password);
+
   //for registring a user//
   useEffect(() => {
-    if (userData && userData.length >= 0) {
-      console.log("running effect");
+    if (userData.length > 0) {
       localStorage.setItem("data", JSON.stringify(userData));
       setIsRegistered(true);
     }
   }, [userData]);
 
-  function logging(username, password) {
-    if (
-      userData &&
-      userData[0]?.username === username &&
-      userData[0]?.password === password
-    ) {
-      setIsLoggedIn(true);
-      return true;
-    } else {
-      setIsLoggedIn(false);
-      return false;
+  //geting the data whenever the user refresh the page //
+  useEffect(() => {
+    const data = localStorage.getItem("data");
+    console.log(data);
+    if (data) {
+      const parseData = JSON.parse(data);
+      setUserData(parseData);
     }
-  }
+  }, []);
+
+  //user loging in
+  function logging(username, password) {}
 
   return (
     <AuthContext.Provider
