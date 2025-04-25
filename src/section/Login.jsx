@@ -14,16 +14,23 @@ import {
 import { Button } from "@/components/ui/button.jsx";
 import { formSchema } from "../schemas/UserLoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const { loggedIn, logging, userData } = useContext(AuthContext);
-
+  console.log(loggedIn);
+  const navigate = useNavigate();
   const methods = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(data) {
-    logging(data);
+  function onSubmit({ username, password }) {
+    logging(username, password);
   }
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/products");
+    }
+  }, [loggedIn]);
 
   return (
     <section className="w-full max-w-[1400px] flex flex-col justify-center items-center p-30 bg-midnight ">

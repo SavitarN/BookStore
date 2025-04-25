@@ -11,18 +11,20 @@ import {
 } from "@/components/ui/form.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import { AuthContext } from "../context/AuthContex";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { formSchema } from "../schemas/UserRegistrationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 const UserRegistration = () => {
   const navigate = useNavigate();
-  const { userData, setUserData } = useContext(AuthContext);
+  const { setUserData } = useContext(AuthContext);
 
   const methods = useForm({
     resolver: zodResolver(formSchema),
   });
   function onSubmit(data) {
     setUserData((prevData) => (prevData ? [...prevData, data] : [data]));
+    methods.reset();
+    navigate("/login");
   }
   return (
     <section className="w-full max-w-[1400px] flex flex-col justify-center items-center p-30 bg-midnight ">
@@ -111,6 +113,12 @@ const UserRegistration = () => {
             <Button className="btn-navy btn-navy:hover mx-auto" type="submit">
               Submit
             </Button>
+            <p className="text-center">
+              Already have an account ?{" "}
+              <Link to="/login" className="text-blue-600">
+                Login
+              </Link>
+            </p>
           </form>
         </FormProvider>
       </div>

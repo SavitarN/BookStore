@@ -1,10 +1,12 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContex";
 const Products = () => {
+  const { userLogged, loggedIn } = useContext(AuthContext);
+
   return (
-    <div>
-      <h2>You have logged in</h2>
-    </div>
+    <section className="w-full p-30 min-h-screen">
+      {loggedIn && <p>hello {userLogged?.username}</p>}
+    </section>
   );
 };
 
