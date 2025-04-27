@@ -56,6 +56,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  localStorage.clear();
   return (
     <AuthContext.Provider
       value={{

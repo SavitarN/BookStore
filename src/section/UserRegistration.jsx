@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   Form,
@@ -14,20 +14,27 @@ import { AuthContext } from "../context/AuthContex";
 import { useNavigate, Link } from "react-router";
 import { formSchema } from "../schemas/UserRegistrationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast, Toaster } from "react-hot-toast";
 const UserRegistration = () => {
   const navigate = useNavigate();
   const { setUserData } = useContext(AuthContext);
-
   const methods = useForm({
     resolver: zodResolver(formSchema),
   });
   function onSubmit(data) {
     setUserData((prevData) => (prevData ? [...prevData, data] : [data]));
+
+    toast.success("Registered Succesfully!");
     methods.reset();
-    navigate("/login");
+
+    setTimeout(() => {
+      navigate("/login");
+    }, 4000);
   }
+
   return (
     <section className="w-full max-w-[1400px] flex flex-col justify-center items-center p-30 bg-midnight ">
+      <Toaster position="top-right" reverseOrder={false}></Toaster>
       <p className="text-white font-bold text-2xl">Register Here</p>
       <div className="p-10  mt-4 flex  justify-center items-center md:w-1/2 bg-white/90 z-50 rounded-xl  ">
         <FormProvider {...methods}>
