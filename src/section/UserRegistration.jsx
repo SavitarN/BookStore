@@ -24,12 +24,18 @@ const UserRegistration = () => {
   function onSubmit(data) {
     setUserData((prevData) => (prevData ? [...prevData, data] : [data]));
 
-    toast.success("Registered Succesfully!");
-    methods.reset();
+    const toastId = toast.success("Registered Succesfully!");
 
-    setTimeout(() => {
-      navigate("/login");
-    }, 4000);
+    toast
+      .promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
+        loading: "Redirecting...",
+        success: "Redirected",
+        error: "Somthing went wrong !",
+      })
+      .then(() => {
+        navigate("/login");
+      });
+    methods.reset();
   }
 
   return (

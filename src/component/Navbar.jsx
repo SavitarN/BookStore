@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import BookLogo from "../assets/image/Booklogo.png";
+import { AuthContext } from "../context/AuthContex";
 const Navbar = () => {
+  const { loggedIn } = useContext(AuthContext);
+  console.log(loggedIn);
   return (
     <nav className="bg-midnight text-white fixed w-full z-50 flex justify-between items-center shadow-md h-10  p-4 md:p-6 lg:p-10 max-sm:hidden">
       <div className="p-2">
@@ -27,7 +30,7 @@ const Navbar = () => {
 
         <li>
           <Link to={"login"} className=" hover:text-blue-500 duration-200">
-            Login
+            {!loggedIn ? "Login" : null}
           </Link>
         </li>
       </ul>

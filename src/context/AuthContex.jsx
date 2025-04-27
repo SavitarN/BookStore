@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   //geting the data whenever the user refresh the page //
   useEffect(() => {
     const data = localStorage.getItem("data");
-    console.log(data);
+
     if (data) {
       const parseData = JSON.parse(data);
       setUserData(parseData);
@@ -56,7 +56,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  localStorage.clear();
   return (
     <AuthContext.Provider
       value={{
