@@ -1,5 +1,7 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-hot-toast";
 
 //create authContext //
 export const AuthContext = createContext();
@@ -41,7 +43,9 @@ export const AuthProvider = ({ children }) => {
     if (user) {
       setIsLoggedIn(true);
       setUserLogged(user);
-      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("loggedIn", true);
+      localStorage.setItem("userLogged", JSON.stringify(user));
+
       return true;
     } else {
       setIsLoggedIn(false);
@@ -51,10 +55,20 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("loggedIn");
+    const userLogged = localStorage.getItem("userLogged");
+
     if (isLoggedIn) {
       setIsLoggedIn(true);
+      setUserLogged(JSON.parse(userLogged));
     }
   }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("userLogged");
+    localStorage.removeItem("loggedIn");
+    setIsLoggedIn(false);
+    setUserLogged(null);
+  }
 
   return (
     <AuthContext.Provider
@@ -65,6 +79,7 @@ export const AuthProvider = ({ children }) => {
         logging,
         loggedIn,
         userLogged,
+        handleLogout,
       }}
     >
       {children}
