@@ -79,8 +79,19 @@ const Products = () => {
         )}
       </div>
 
-      <section className="w-full">
-        <div className="grid md:grid-cols-3 sm:grid-cols-2"></div>
+      <section className="w-full ">
+        <div className="grid md:grid-cols-3 sm:grid-cols-1 border border-red-400">
+          {books.map((bookItem) => (
+            <div className="border border-green-400">
+              <img
+                src={`https://covers.openlibrary.org/b/id/${bookItem.cover_id}-M.jpg`}
+                alt="book cover image"
+              ></img>
+              <p>{bookItem.title}</p>
+              <p>{bookItem?.authors[0]?.name}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </section>
   );
