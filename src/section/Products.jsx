@@ -8,11 +8,16 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import ConfirmLogout from "../component/confirmLogout";
 import { useNavigate } from "react-router";
+import CategorySelect from "../component/CategorySelect";
+import { useFetch } from "../hooks/useFetch";
 
 const Products = () => {
   const { userLogged, loggedIn, handleLogout } = useContext(AuthContext);
   const [modal, setShowModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
+  const { books, loading } = useFetch("arts");
+  console.log(books);
+  useFetch();
   const navigate = useNavigate();
   const {
     register,
@@ -36,8 +41,8 @@ const Products = () => {
 
   return (
     <section className="w-full p-30  min-h-screen flex flex-col  max-sm:px-10 max-sm:py-30">
-      <div className="w-full flex justify-between items-center ">
-        <div className="flex items-center rounded-2xl shadow p-3 w-[50%]">
+      <div className="w-full flex justify-between items-center   ">
+        <div className="flex items-center rounded-2xl shadow p-3 ">
           <Input
             className="border-none bg-transparent focus:outline-none  p-5  "
             placeholder="Search your books here"
@@ -54,26 +59,11 @@ const Products = () => {
           >
             <FilterIcon />
           </button>
-          {modal && (
-            <div className="font-semibold">
-              <form onSubmit={handleSubmit(onsubmit)}>
-                <select
-                  id="mySelect"
-                  {...register("mySelect", {
-                    required: "This field is required",
-                  })}
-                >
-                  <option value="">Select category</option>
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                </select>
-              </form>
-            </div>
-          )}
+          {modal && <CategorySelect />}
         </div>
 
         {userLogged && (
-          <div className=" flex flex-col items-center justify-center gap-2">
+          <div className=" flex flex-col items-center justify-center gap-2 ">
             {" "}
             <p className="font-semibold max-sm:whitespace-nowrap ">
               Hi {userLogged?.username}🙋‍♂️
@@ -89,7 +79,9 @@ const Products = () => {
         )}
       </div>
 
-      <section></section>
+      <section className="w-full">
+        <div className="grid md:grid-cols-3 sm:grid-cols-2"></div>
+      </section>
     </section>
   );
 };
