@@ -1,6 +1,7 @@
 import React from "react";
 
 const ConfirmLogout = ({ confirm, cancel }) => {
+  console.log("loging out component");
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-xl p-8 flex flex-col items-center gap-4">
