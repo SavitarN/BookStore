@@ -18,17 +18,17 @@ const CategorySelect = () => {
   } = useForm();
 
   return (
-    <div className=" font-semibold">
+    <div className=" font-semibold absolute top-50 left-50 ">
       <form>
         <Select>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="arts">Arts</SelectItem>
-            <SelectItem value="fiction">Fiction</SelectItem>
-            <SelectItem value="finance">Business & Finance</SelectItem>
-            <SelectItem value="finance">Literature</SelectItem>
+            <SelectItem value="Arts">Arts</SelectItem>
+            <SelectItem value="Fiction">Fiction</SelectItem>
+            <SelectItem value="Business">Business & Finance</SelectItem>
+            <SelectItem value="Literature">Literature</SelectItem>
           </SelectContent>
         </Select>
       </form>
