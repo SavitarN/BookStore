@@ -86,6 +86,7 @@ const Products = () => {
 
       <section className="w-full mt-10">
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 ">
+          {loading && <p>Loading.........</p>}
           {booksFiltered &&
             booksFiltered.map((bookItem) => <ProductCard {...bookItem} />)}
         </div>

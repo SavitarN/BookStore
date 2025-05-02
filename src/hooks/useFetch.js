@@ -7,7 +7,7 @@ const baseUrl = 'https://openlibrary.org/subjects';
 
 
 
-export const useFetch = (bookName) => {
+export const useFetch = (category) => {
     const [books, setBooks] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -15,8 +15,9 @@ export const useFetch = (bookName) => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
-                const response = await axios.get(`${baseUrl}/${bookName}.json`);
+                const response = await axios.get(`${baseUrl}/${category}.json`);
                 if (response.status === 200) {
                     setBooks(response.data.works)
                 }
@@ -28,7 +29,7 @@ export const useFetch = (bookName) => {
         }
 
         fetchData();
-    }, [bookName]);
+    }, [category]);
     return { books, loading, error }
 
 }
