@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContex";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -11,11 +11,16 @@ import { Button } from "../components/ui/button";
 import ProductCard from "../component/ProductCard";
 const Products = () => {
   const { userLogged, loggedIn, handleLogout } = useContext(AuthContext);
+
   const [modal, setShowModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
   const [category, setCategory] = useState("arts");
   const { books, loading, error } = useFetch(category);
   const [booksFiltered, setBooksFiltered] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 6;
+  const pages = Math.ceil(books && books.length / itemsPerPage); // itemsPerPage=6
   console.log("books original array here", books);
   console.log("filtered books", booksFiltered);
 
@@ -43,18 +48,15 @@ const Products = () => {
   }
 
   //logic for handeling previous and next pages(pagination)//
-  function handleClick(e) {
-    if (e.target.value === "next") {
-      setBooksFiltered(books.slice(5, 12));
-    } else if (e.target.value === "previous") {
-      setBooksFiltered(books.slice(0, 5));
-    }
-  }
+  function handleClick(e) {}
+
   useEffect(() => {
     if (!loading) {
-      setBooksFiltered(books.slice(0, 5));
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = itemsPerPage * currentPage;
+      setBooksFiltered(books.slice(start, end));
     }
-  }, [loading]);
+  }, [loading, currentPage, books]);
 
   return (
     <section className="w-full p-30  min-h-screen flex flex-col  max-sm:px-10 max-sm:py-30">
@@ -88,12 +90,16 @@ const Products = () => {
             booksFiltered.map((bookItem) => <ProductCard {...bookItem} />)}
         </div>
         <div className="flex gap-4 ">
-          <button onClick={handleClick} value="next">
-            next
-          </button>
-          <button onClick={handleClick} value="previous">
-            previous
-          </button>
+          {/* creating something like [0,0,0,0,0] idx=0,1,2,3,4*/}
+          {Array.from({ length: pages }, (_, idx) => (
+            <button
+              key={idx}
+              className="px-2 py-2 border"
+              onClick={() => setCurrentPage(idx + 1)}
+            >
+              {idx + 1}
+            </button>
+          ))}
         </div>
       </section>
     </section>
