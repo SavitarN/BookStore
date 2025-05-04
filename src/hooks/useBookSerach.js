@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import SerachBooks from "../component/SerachBooks";
 const useBookSerach = (bookName) => {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errors, setError] = useState(null);
 
+
   useEffect(() => {
-    if (!bookName) return;
+    if (!bookName?.trim()) return;
 
 
     const fetchData = async () => {
@@ -15,10 +17,11 @@ const useBookSerach = (bookName) => {
         const response = await axios.get(
           `https://openlibrary.org/search.json?title=${encodeURIComponent(
             bookName
-          )}`
-        );
+          )}
+         &fields=*,availability&sort=new&limit=10`);
 
         setSearchResult(response.data.docs);
+
 
       }
 
