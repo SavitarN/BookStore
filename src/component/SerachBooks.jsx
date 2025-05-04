@@ -10,20 +10,9 @@ const SerachBooks = ({
   setShowModal,
   setQuery,
   keystrokeSearch,
-  setKyeStrokeSearch,
+  handleSuggestionClick,
+  inputValue,
 }) => {
-  const {
-    register,
-
-    formState: { error, isSubmitting },
-  } = useForm();
-
-  const [inputValue, setInputValue] = useState(null);
-  console.log(inputValue);
-  function handleClick(i) {
-    setInputValue(keystrokeSearch[i].title);
-    setKyeStrokeSearch([]);
-  }
   return (
     <form
       className="w-full flex items-center "
@@ -35,9 +24,9 @@ const SerachBooks = ({
         className="border-none bg-transparent focus:outline-none  p-5  "
         placeholder="Search your books here"
         onChange={(e) => setQuery(e.target.value)}
-        value={inputValue && inputValue.title}
+        value={inputValue || ""}
       />
-      <button type="submit" className="m-4 cursor-pointer">
+      <button className="m-4 cursor-pointer">
         <Search />
       </button>
       {keystrokeSearch.length > 0 && (
@@ -47,7 +36,7 @@ const SerachBooks = ({
               <li
                 className="cursor-pointer active:text-blue-500"
                 key={i}
-                onClick={() => handleClick(i)}
+                onClick={() => handleSuggestionClick(i)}
               >
                 {s.title}
               </li>

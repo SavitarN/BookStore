@@ -50,6 +50,16 @@ const Products = () => {
     }
   }, [query, searchResult]);
 
+  //when the user selects any suggestion ( for controlled components)//
+  const [inputValue, setInputValue] = useState(null);
+
+  //when the user clicks on the suggestion list//
+  function handleSuggestionClick(i) {
+    console.log(i);
+    setInputValue(keystrokeSearch[i].title);
+    setKeyStrokeSearch([]);
+  }
+
   //logic for pagination//
   const itemsPerPage = 6;
   const pages = Math.ceil(books && books.length / itemsPerPage); // itemsPerPage=6
@@ -87,6 +97,8 @@ const Products = () => {
             setShowModal={setShowModal}
             setQuery={setQuery}
             keystrokeSearch={keystrokeSearch}
+            handleSuggestionClick={handleSuggestionClick}
+            inputValue={inputValue}
           />
 
           {modal && <CategorySelect />}
