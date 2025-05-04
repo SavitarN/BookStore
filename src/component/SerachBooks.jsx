@@ -24,7 +24,7 @@ const SerachBooks = ({
         className="border-none bg-transparent focus:outline-none  p-5  "
         placeholder="Search your books here"
         onChange={(e) => setQuery(e.target.value)}
-        value={inputValue || ""}
+        value={inputValue && inputValue}
       />
       <button className="m-4 cursor-pointer">
         <Search />

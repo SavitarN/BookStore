@@ -30,33 +30,34 @@ const Products = () => {
 
   //for searching a book//
   // 1st) store the query of user and we will pass them as prop to our search component//
-  const [query, setQuery] = useState("");
-
+  const [halfquery, sethalfQuery] = useState("");
+  const [fullQuery, setFullQuery] = useState("");
   //2nd) now as the user types in we constantly makes api request//
-  const { searchResult } = useBookSerach(query);
+  const { searchResult } = useBookSerach(halfquery);
 
   //3) once you filter out the keys typed that matches the title we store it in a state//
 
   const [keystrokeSearch, setKeyStrokeSearch] = useState([]);
   console.log("keystrokeSearch", keystrokeSearch);
 
-  //for every key stroke firing an api call//
-  useEffect(() => {
-    if (query && searchResult.length > 0) {
-      const keystrokeSearch = searchResult.filter((elem) =>
-        elem.title.includes(query)
-      );
-      setKeyStrokeSearch(keystrokeSearch);
-    }
-  }, [query, searchResult]);
+  //for every 3 key stroke firing an api call//
+  // useEffect(() => {
+  //   if (query && searchResult.length > 0) {
+  //     const keystrokeSearch = searchResult.filter((elem) =>
+  //       elem.title.includes(query)
+  //     );
+  //     setKeyStrokeSearch(keystrokeSearch);
+  //   }
+  // }, [query, searchResult]);
 
   //when the user selects any suggestion ( for controlled components)//
   const [inputValue, setInputValue] = useState(null);
 
   //when the user clicks on the suggestion list//
   function handleSuggestionClick(i) {
-    console.log(i);
-    setInputValue(keystrokeSearch[i].title);
+    const selectedTitle = keystrokeSearch[i].title;
+    setInputValue(selectedTitle);
+    setFullQuery(selectedTitle);
     setKeyStrokeSearch([]);
   }
 

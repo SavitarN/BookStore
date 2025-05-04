@@ -8,7 +8,7 @@ const useBookSerach = (bookName) => {
 
 
   useEffect(() => {
-    if (!bookName?.trim()) return;
+    if (!bookName?.trim() || bookName.length < 3) return;
 
 
     const fetchData = async () => {
@@ -21,7 +21,6 @@ const useBookSerach = (bookName) => {
          &fields=*,availability&sort=new&limit=10`);
 
         setSearchResult(response.data.docs);
-
 
       }
 
