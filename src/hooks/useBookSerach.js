@@ -6,7 +6,8 @@ const useBookSerach = (bookName) => {
   const [loading, setLoading] = useState(true);
   const [errors, setError] = useState(null);
 
-
+  console.log('key you are pressing for query', bookName)
+  console.log('after 3 press you will have search result', searchResult)
   useEffect(() => {
     if (!bookName?.trim() || bookName.length < 3) return;
 

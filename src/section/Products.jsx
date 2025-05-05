@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContex";
-import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import ConfirmLogout from "../component/confirmLogout";
 import { useNavigate } from "react-router";
@@ -10,14 +9,9 @@ import SerachBooks from "../component/SerachBooks";
 import { Button } from "../components/ui/button";
 import ProductCard from "../component/ProductCard";
 import useBookSerach from "../hooks/useBookSerach";
+import SearchResult from "../component/SearchResult";
 const Products = () => {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
   const { userLogged, loggedIn, handleLogout } = useContext(AuthContext);
 
   const [modal, setShowModal] = useState(false);
@@ -30,25 +24,31 @@ const Products = () => {
 
   //for searching a book//
   // 1st) store the query of user and we will pass them as prop to our search component//
-  const [halfquery, sethalfQuery] = useState("");
-  const [fullQuery, setFullQuery] = useState("");
+  const [query, setQuery] = useState("");
   //2nd) now as the user types in we constantly makes api request//
-  const { searchResult } = useBookSerach(halfquery);
+  const { searchResult } = useBookSerach(query);
 
   //3) once you filter out the keys typed that matches the title we store it in a state//
-
+  //keystrokeSearch state holds the value that will be displayed for suggestions and once the user selects the suggestion keyStrokeSearch will get updated by the books related to same title name//
   const [keystrokeSearch, setKeyStrokeSearch] = useState([]);
-  console.log("keystrokeSearch", keystrokeSearch);
 
-  //for every 3 key stroke firing an api call//
-  // useEffect(() => {
-  //   if (query && searchResult.length > 0) {
-  //     const keystrokeSearch = searchResult.filter((elem) =>
-  //       elem.title.includes(query)
-  //     );
-  //     setKeyStrokeSearch(keystrokeSearch);
-  //   }
-  // }, [query, searchResult]);
+  // for every 3 key stroke firing an api call//
+  useEffect(() => {
+    if (query.length < 3) {
+      setKeyStrokeSearch([]);
+    } else if (
+      query &&
+      Array.isArray(searchResult) &&
+      searchResult.length > 0 &&
+      query.length >= 3
+    ) {
+      const keystrokeSearch = searchResult.filter((elem) => {
+        return elem.title.toLowerCase().includes(query.toLowerCase());
+      });
+
+      setKeyStrokeSearch(keystrokeSearch);
+    }
+  }, [searchResult]);
 
   //when the user selects any suggestion ( for controlled components)//
   const [inputValue, setInputValue] = useState(null);
@@ -57,7 +57,7 @@ const Products = () => {
   function handleSuggestionClick(i) {
     const selectedTitle = keystrokeSearch[i].title;
     setInputValue(selectedTitle);
-    setFullQuery(selectedTitle);
+    setQuery(selectedTitle);
     setKeyStrokeSearch([]);
   }
 
@@ -65,15 +65,12 @@ const Products = () => {
   const itemsPerPage = 6;
   const pages = Math.ceil(books && books.length / itemsPerPage); // itemsPerPage=6
 
-  const onSubmit = (data) => console.log(data);
-
   //confirm page for logout//
   function confirm() {
     handleLogout();
 
     toast.success("Logged Out Succesfully");
     setLogoutModal(false);
-
     navigate("/");
   }
 
@@ -100,6 +97,7 @@ const Products = () => {
             keystrokeSearch={keystrokeSearch}
             handleSuggestionClick={handleSuggestionClick}
             inputValue={inputValue}
+            query={query}
           />
 
           {modal && <CategorySelect />}
@@ -125,22 +123,33 @@ const Products = () => {
       <section className="w-full mt-10">
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 ">
           {loading && <p>Loading.........</p>}
-          {booksFiltered &&
-            booksFiltered.map((bookItem) => <ProductCard {...bookItem} />)}
+          {console.log(keystrokeSearch)}
+          {console.log(booksFiltered)}
+
+          {query.length > 3 && keystrokeSearch.length > 0
+            ? keystrokeSearch.map((Searchedelem) => (
+                <SearchResult {...Searchedelem} />
+              ))
+            : booksFiltered &&
+              booksFiltered.map((bookItem) => (
+                <ProductCard key={bookItem.cover_id} {...bookItem} />
+              ))}
         </div>
 
-        <div className="flex gap-4 ">
-          {/* creating something like [0,0,0,0,0] idx=0,1,2,3,4*/}
-          {Array.from({ length: pages }, (_, idx) => (
-            <button
-              key={idx}
-              className="px-2 py-2 border"
-              onClick={() => setCurrentPage(idx + 1)}
-            >
-              {idx + 1}
-            </button>
-          ))}
-        </div>
+        {keystrokeSearch.length === 0 && (
+          <div className="flex gap-4 ">
+            {/* creating something like [0,0,0,0,0] idx=0,1,2,3,4*/}
+            {Array.from({ length: pages }, (_, idx) => (
+              <button
+                key={idx}
+                className="px-2 py-2 border"
+                onClick={() => setCurrentPage(idx + 1)}
+              >
+                {idx + 1}
+              </button>
+            ))}
+          </div>
+        )}
       </section>
     </section>
   );

@@ -12,6 +12,7 @@ const SerachBooks = ({
   keystrokeSearch,
   handleSuggestionClick,
   inputValue,
+  query,
 }) => {
   return (
     <form
@@ -29,9 +30,9 @@ const SerachBooks = ({
       <button className="m-4 cursor-pointer">
         <Search />
       </button>
-      {keystrokeSearch.length > 0 && (
-        <div className="absolute w-[50%] z-50 top-45 rounded-xl gap-4 flex flex-col bg-white text-black">
-          <ul>
+      {keystrokeSearch.length > 0 && query.length >= 3 && (
+        <div className="absolute w-[50%] z-50 top-50 rounded-xl gap-4 flex flex-coltext-black shadow-lg">
+          <ul className="divide-y divide-gray-200">
             {keystrokeSearch.map((s, i) => (
               <li
                 className="cursor-pointer active:text-blue-500"
