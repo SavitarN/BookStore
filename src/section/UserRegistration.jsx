@@ -17,15 +17,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast, Toaster } from "react-hot-toast";
 const UserRegistration = () => {
   const navigate = useNavigate();
+
   const { setUserData } = useContext(AuthContext);
+
   const methods = useForm({
     resolver: zodResolver(formSchema),
   });
+
   function onSubmit(data) {
     setUserData((prevData) => (prevData ? [...prevData, data] : [data]));
 
-    const toastId = toast.success("Registered Succesfully!");
-
+    //since toast works with only promise and we don't have any async api fetching call so we created a fake promise and once i'ts pending it shouws redirecting and when promise is resolved it shows redirected and if there is any erorr it shows something went wrong//
     toast
       .promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
         loading: "Redirecting...",
