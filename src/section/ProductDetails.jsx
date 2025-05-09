@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "../components/ui/button";
@@ -65,6 +66,19 @@ const ProductDetails = () => {
         </Button>
       </div>
     </>
+=======
+import React from "react";
+import { useParams } from "react-router";
+import { AuthContext } from "../context/AuthContex";
+import { useContext } from "react";
+const ProductDetails = () => {
+  const { title } = useParams();
+
+  return (
+    <div className="bg-red-400 text-black p-30">
+      <p>details here:{title}</p>
+    </div>
+>>>>>>> 41a2868126be9d7850a4dad4c3abffc22daaaab9
   );
 };
 

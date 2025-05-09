@@ -33,7 +33,7 @@ const Login = () => {
   }
   useEffect(() => {
     if (loggedIn) {
-      navigate("/products");
+      navigate("/product/:id");
     }
   }, [loggedIn]);
 

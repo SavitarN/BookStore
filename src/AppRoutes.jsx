@@ -7,6 +7,7 @@ import ProductDetails from "./section/ProductDetails";
 import Login from "./section/Login";
 import UserRegistration from "./section/UserRegistration";
 import ProtectedRoute from "../src/utils/ProtectedRoute";
+import ProtectedRoute from "../src/utils/ProtectedRoute";
 const AppRoutes = () => {
   return (
     <Routes>
