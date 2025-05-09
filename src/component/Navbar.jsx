@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import BookLogo from "../assets/image/Booklogo.png";
 import { AuthContext } from "../context/AuthContex";
+import { ShoppingCart } from "lucide-react";
 const Navbar = () => {
   const { loggedIn } = useContext(AuthContext);
   console.log(loggedIn);
@@ -24,15 +25,24 @@ const Navbar = () => {
         </li>
         <li>
           <Link to={"products"} className=" hover:text-blue-500 duration-200">
-            Product
+            Books
           </Link>
         </li>
 
+        {console.log("logged in or not", loggedIn)}
         <li>
           <Link to={"login"} className=" hover:text-blue-500 duration-200">
             {!loggedIn ? "Login" : null}
           </Link>
         </li>
+
+        {loggedIn ? (
+          <li>
+            <Link to="" className=" hover:text-blue-500 duration-200">
+              <ShoppingCart />
+            </Link>
+          </li>
+        ) : null}
       </ul>
       <div className="absolute sm:hidden">&times</div>
     </nav>
