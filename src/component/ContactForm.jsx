@@ -10,9 +10,7 @@ const ContactForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
-        console.log(data);
-      })}
+      onSubmit={handleSubmit((data) => {})}
       className="p-5 border border-blue-400/10 rounded text-white flex flex-col items-center gap-4 w-[50%]"
     >
       <input

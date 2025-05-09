@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
   const [userLogged, setUserLogged] = useState(null);
   const [loggedIn, setIsLoggedIn] = useState(false);
 
-  console.log(userLogged);
   //for registring a user//
   useEffect(() => {
     if (userData.length > 0) {

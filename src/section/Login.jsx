@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button.jsx";
 import { formSchema } from "../schemas/UserLoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 const Login = () => {
   const { loggedIn, logging, userData } = useContext(AuthContext);
   console.log(loggedIn);
@@ -24,16 +25,21 @@ const Login = () => {
   });
 
   function onSubmit({ username, password }) {
-    logging(username, password);
+    if (logging(username, password)) {
+      toast.success("You have logged in successully");
+    } else {
+      toast.error("invalid username and password");
+    }
   }
   useEffect(() => {
     if (loggedIn) {
-      navigate("/products");
+      navigate("/product/:id");
     }
   }, [loggedIn]);
 
   return (
     <section className="w-full max-w-[1400px] flex flex-col justify-center items-center p-30 bg-midnight ">
+      <Toaster position="top-center" reverseOrder={false} />
       <p className="text-white font-bold text-2xl">Sign Up Here</p>
       <div className="p-10  mt-4 flex  justify-center items-center md:w-1/2 bg-white/90 z-50 rounded-xl  ">
         <FormProvider {...methods}>

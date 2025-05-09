@@ -9,7 +9,7 @@ import SerachBooks from "../component/SerachBooks";
 import { Button } from "../components/ui/button";
 import ProductCard from "../component/ProductCard";
 import useBookSerach from "../hooks/useBookSerach";
-import SearchResult from "../component/SearchResult";
+
 const Products = () => {
   const navigate = useNavigate();
   const { userLogged, loggedIn, handleLogout } = useContext(AuthContext);
@@ -48,7 +48,7 @@ const Products = () => {
 
       setKeyStrokeSearch(keystrokeSearch);
     }
-  }, [searchResult]);
+  }, [query, searchResult]);
 
   //when the user selects any suggestion ( for controlled components)//
   const [inputValue, setInputValue] = useState(null);
@@ -123,12 +123,12 @@ const Products = () => {
       <section className="w-full mt-10">
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 ">
           {loading && <p>Loading.........</p>}
-          {console.log(keystrokeSearch)}
+          {console.log("keystroke", keystrokeSearch)}
           {console.log(booksFiltered)}
 
           {query.length > 3 && keystrokeSearch.length > 0
             ? keystrokeSearch.map((Searchedelem) => (
-                <SearchResult {...Searchedelem} />
+                <ProductCard {...Searchedelem} />
               ))
             : booksFiltered &&
               booksFiltered.map((bookItem) => (
