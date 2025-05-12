@@ -19,6 +19,7 @@ const Products = () => {
   const [category, setCategory] = useState("arts");
   //custom hook for fetching book according to the category//
   const { books, loading, error } = useFetch(category);
+
   const [booksFiltered, setBooksFiltered] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -132,7 +133,12 @@ const Products = () => {
               ))
             : booksFiltered &&
               booksFiltered.map((bookItem) => (
-                <ProductCard key={bookItem.cover_id} {...bookItem} />
+                <ProductCard
+                  key={bookItem.cover_edition_key}
+                  {...bookItem}
+                  cover_edition_id={bookItem.cover_edition_key}
+                  product={bookItem}
+                />
               ))}
         </div>
 

@@ -12,7 +12,7 @@ export const useFetch = (category) => {
     const [loading, setLoading] = useState(true);
 
     const [error, setError] = useState(null);
-
+    console.log('when the user first loads the page', books)
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);

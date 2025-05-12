@@ -1,6 +1,17 @@
 import React from "react";
 import { Button } from "../components/ui/button";
+import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 const ProductCard = (props) => {
+  const { setCartItems, cartItems } = useCart();
+
+  function handleCart(id) {
+    console.log(id);
+    const addedProduct = props.cover_edition_key === id ? props : null;
+    setCartItems((prevValue) => {
+      return prevValue ? [...prevValue, addedProduct] : addedProduct;
+    });
+  }
   return (
     <div className="min-h-[400px]  flex flex-col items-center justify-around p-5 rounded shadow-xl gap-5  ">
       <div className="w-[200px] h-[240px] flex bg-white items-center justify-center ">
@@ -21,8 +32,15 @@ const ProductCard = (props) => {
         </p>
       </div>
       <div className="flex w-auto justify-around sm:flex-row  flex-col gap-2 items-center  ">
-        <Button className="btn-navy btn-navy:hover px-2 ">Add To Cart</Button>
-        <Button className="btn-navy btn-navy:hover  px-2  ">Book Detail</Button>
+        <Button
+          className="btn-navy btn-navy:hover px-2 "
+          onClick={() => handleCart(props.cover_edition_key)}
+        >
+          Add To Cart
+        </Button>
+        <Button className="btn-navy btn-navy:hover  px-2  ">
+          <Link to={`/products/${props.cover_edition_key}`}>Book Detail</Link>
+        </Button>
       </div>
     </div>
   );
