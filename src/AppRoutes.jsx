@@ -7,7 +7,6 @@ import ProductDetails from "./section/ProductDetails";
 import Login from "./section/Login";
 import UserRegistration from "./section/UserRegistration";
 import ProtectedRoute from "../src/utils/ProtectedRoute";
-import { CartProvider } from "./context/CartContext";
 
 const AppRoutes = () => {
   return (
@@ -15,23 +14,14 @@ const AppRoutes = () => {
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
 
-        <Route
-          path="products"
-          element={
-            <CartProvider>
-              <Products />
-            </CartProvider>
-          }
-        />
+        <Route path="products" element={<Products />} />
 
         <Route
           path="products/:id"
           element={
-            <CartProvider>
-              <ProtectedRoute>
-                <ProductDetails />
-              </ProtectedRoute>
-            </CartProvider>
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
           }
         />
 

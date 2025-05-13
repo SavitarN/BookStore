@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import BookLogo from "../assets/image/Booklogo.png";
 import { AuthContext } from "../context/AuthContex";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "../context/CartContext";
 const Navbar = () => {
+  const { itemsPlaced } = useCart();
   const { loggedIn } = useContext(AuthContext);
-  console.log(loggedIn);
+
   return (
     <nav className="bg-midnight text-white fixed w-full z-50 flex justify-between items-center shadow-md h-10  p-4 md:p-6 lg:p-10 max-sm:hidden">
       <div className="p-2">
@@ -40,6 +42,7 @@ const Navbar = () => {
           <li>
             <Link to="" className=" hover:text-blue-500 duration-200">
               <ShoppingCart />
+              <span>{itemsPlaced}</span>
             </Link>
           </li>
         ) : null}
