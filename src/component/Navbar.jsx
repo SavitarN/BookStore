@@ -9,7 +9,7 @@ const Navbar = () => {
   const { loggedIn } = useContext(AuthContext);
 
   return (
-    <nav className="bg-midnight text-white fixed w-full z-50 flex justify-between items-center shadow-md h-10  p-4 md:p-6 lg:p-10 max-sm:hidden">
+    <nav className="bg-midnight text-white fixed w-full z-50 flex justify-between items-center shadow-md h-10  p-4 md:p-10 lg:p-10 max-sm:hidden">
       <div className="p-2">
         <img
           src={BookLogo}
@@ -19,7 +19,7 @@ const Navbar = () => {
         />
       </div>
 
-      <ul className="  flex justify-center items-center   gap-20 text-sm font-medium list-none pr-5">
+      <ul className="  flex justify-center items-center   gap-20 text-sm font-medium list-none pr-5 ">
         <li>
           <Link to={"/"} className=" hover:text-blue-500 duration-200">
             Home
@@ -40,9 +40,14 @@ const Navbar = () => {
 
         {loggedIn ? (
           <li>
-            <Link to="" className=" hover:text-blue-500 duration-200">
+            <Link
+              to=""
+              className=" hover:text-blue-500 duration-200 flex gap-2 items-center"
+            >
               <ShoppingCart />
-              <span>{itemsPlaced}</span>
+              <span className="inline-block bg-gray-400 h-5 w-5 rounded-4xl text-center">
+                {itemsPlaced}
+              </span>
             </Link>
           </li>
         ) : null}
