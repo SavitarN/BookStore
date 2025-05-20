@@ -9,6 +9,7 @@ import SerachBooks from "../component/SerachBooks";
 import { Button } from "../components/ui/button";
 import ProductCard from "../component/ProductCard";
 import useBookSerach from "../hooks/useBookSerach";
+import Spinner from "../component/Spinner";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Products = () => {
   const [keystrokeSearch, setKeyStrokeSearch] = useState([]);
 
   // for every 3 key stroke firing an api call//
-  useEffect(() => {
+  useEffect(() => { 
     if (query.length < 3) {
       setKeyStrokeSearch([]);
     } else if (
@@ -101,7 +102,7 @@ const Products = () => {
             query={query}
           />
 
-          {modal && <CategorySelect />}
+          {modal && <CategorySelect  />}
         </div>
 
         {userLogged && (
@@ -123,7 +124,7 @@ const Products = () => {
 
       <section className="w-full mt-10">
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 ">
-          {loading && <p>Loading.........</p>}
+          {loading && <Spinner/>}
           {console.log("keystroke", keystrokeSearch)}
           {console.log(booksFiltered)}
 
