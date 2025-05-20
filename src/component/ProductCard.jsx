@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 const ProductCard = (props) => {
   const { setCartItems, cartItems } = useCart();
-
-  console.log("cartItems", cartItems);
   function handleCart(id) {
     const addedProduct = props.cover_edition_key === id ? props : null;
     setCartItems((prevValue) => {

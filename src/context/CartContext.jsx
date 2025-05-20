@@ -10,7 +10,7 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const itemsPlaced = cartItems.length;
-  console.log("cartItems length", cartItems.length);
+
   return (
     <CartContext.Provider value={{ setCartItems, cartItems, itemsPlaced }}>
       {children}

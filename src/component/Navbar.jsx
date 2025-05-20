@@ -41,7 +41,7 @@ const Navbar = () => {
         {loggedIn ? (
           <li>
             <Link
-              to=""
+              to="cart"
               className=" hover:text-blue-500 duration-200 flex gap-2 items-center"
             >
               <ShoppingCart />

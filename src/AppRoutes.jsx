@@ -7,6 +7,7 @@ import ProductDetails from "./section/ProductDetails";
 import Login from "./section/Login";
 import UserRegistration from "./section/UserRegistration";
 import ProtectedRoute from "../src/utils/ProtectedRoute";
+import Cart from "../src/section/Cart";
 
 const AppRoutes = () => {
   return (
@@ -26,7 +27,9 @@ const AppRoutes = () => {
         />
 
         <Route path="login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="register" element={<UserRegistration />} />
+      
       </Route>
     </Routes>
   );

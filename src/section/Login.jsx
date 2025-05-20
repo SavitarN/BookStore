@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button.jsx";
 import { formSchema } from "../schemas/UserLoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 const Login = () => {
   const { loggedIn, logging, userData } = useContext(AuthContext);
@@ -84,13 +84,20 @@ const Login = () => {
                 </FormItem>
               )}
             />
-
-            <Button className="btn-navy btn-navy:hover mx-auto" type="submit">
-              Submit
+            <div className="w-full flex justify-between items-center">
+                  <Button className="btn-navy btn-navy:hover mx-auto" type="submit">
+              Login
             </Button>
+                <Link className="mr-10" to='/register'>Dont Have an Account ? <span className="text-blue-600 ">Register Here</span></Link>
+            </div>
+
+        
           </form>
+        
         </FormProvider>
+          
       </div>
+    
     </section>
   );
 };
