@@ -6,6 +6,7 @@ const ProductCard = (props) => {
   const { setCartItems, cartItems } = useCart();
   function handleCart(id) {
     const addedProduct = props.cover_edition_key === id ? props : null;
+     console.log('added product was',addedProduct)
     setCartItems((prevValue) => {
       return prevValue ? [...prevValue, addedProduct] : addedProduct;
     });

@@ -31,14 +31,14 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {console.log("logged in or not", loggedIn)}
+        
         <li>
           <Link to={"login"} className=" hover:text-blue-500 duration-200">
             {!loggedIn ? "Login" : null}
           </Link>
         </li>
 
-        {loggedIn ? (
+        {loggedIn && itemsPlaced ? (
           <li>
             <Link
               to="cart"

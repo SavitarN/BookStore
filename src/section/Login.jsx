@@ -18,8 +18,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 const Login = () => {
   const { loggedIn, logging, userData } = useContext(AuthContext);
-  console.log(loggedIn);
+
   const navigate = useNavigate();
+
   const methods = useForm({
     resolver: zodResolver(formSchema),
   });
@@ -33,7 +34,7 @@ const Login = () => {
   }
   useEffect(() => {
     if (loggedIn) {
-      navigate("/product/:id");
+      navigate("/products");
     }
   }, [loggedIn]);
 

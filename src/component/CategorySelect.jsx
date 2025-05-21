@@ -17,6 +17,7 @@ const CategorySelect = () => {
     formState: { errors },
   } = useForm();
 
+  
   return (
     <div className=" font-semibold absolute top-50 left-50 ">
       <form>
