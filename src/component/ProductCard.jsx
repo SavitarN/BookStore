@@ -3,46 +3,10 @@ import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 const ProductCard = (props) => {
-  const { setCartItems, cartItems } = useCart();
-  const [quantity,setQuanity]=useState(0);
-  function handleCart(id) {
-     const exists = cartItems.find(item => item.cover_edition_key === id);
-       const addedProduct = props.cover_edition_key === id ? props : null;
-     if(!exists){
-         const newProduct={
-
-          ...addedProduct,
-          quantity:1
-         }
-
-setCartItems((prevValue) => {
-      return prevValue ? [...prevValue, newProduct] : newProduct;
-    });
-     }
-
-    
-  
-    
-  }
+  const { cartItems,handleCart,handlePlus,handleMinus} = useCart();
+ const productInCart=cartItems&&cartItems.find(item=>item.cover_edition_key===props.cover_edition_key);
+ const quantity=productInCart? productInCart.quantity:0;
  
-
-function handlePlus(id){
-
-  const updated=cartItems.map(item=>{
-    return item.cover_edition_key===id?{...item,quantity:item.quantity+1}:item;
-});
-
-  setCartItems(updated);
-}
-
-
- 
-function handleMinus(id){
-   const updated=cartItems.map(item=>{
-    return item.cover_edition_key===id?{...item,quantity:quantity-1}:item;
-});
-  setCartItems(updated);
-}
 
   return (
     <div className="min-h-[400px]  flex flex-col items-center justify-around p-5 rounded shadow-xl gap-5  ">
@@ -66,7 +30,7 @@ function handleMinus(id){
       <div className="flex w-auto justify-around sm:flex-row  flex-col gap-2 items-center  ">
         <Button
           className="btn-navy btn-navy:hover px-2 "
-          onClick={() => handleCart(props.cover_edition_key)}
+          onClick={() => handleCart(props)}
         >
           Add To Cart
         </Button>

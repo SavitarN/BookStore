@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContex";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../context/CartContext";
 const Navbar = () => {
-  const { itemsPlaced } = useCart();
+  const { quanityNumber } = useCart();
   const { loggedIn } = useContext(AuthContext);
 
   return (
@@ -38,7 +38,7 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {loggedIn && itemsPlaced ? (
+        {loggedIn && quanityNumber ? (
           <li>
             <Link
               to="cart"
@@ -46,7 +46,7 @@ const Navbar = () => {
             >
               <ShoppingCart />
               <span className="inline-block bg-gray-400 h-5 w-5 rounded-4xl text-center">
-                {itemsPlaced}
+                {quanityNumber}
               </span>
             </Link>
           </li>
