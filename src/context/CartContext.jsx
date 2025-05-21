@@ -10,9 +10,11 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const itemsPlaced = cartItems.length;
-  console.log('cartItems are',cartItems)
+  console.log('cartItems here',cartItems)
+
+  
   return (
-    <CartContext.Provider value={{ setCartItems, cartItems, itemsPlaced }}>
+    <CartContext.Provider value={{ setCartItems, cartItems, itemsPlaced}}>
       {children}
     </CartContext.Provider>
   ); 

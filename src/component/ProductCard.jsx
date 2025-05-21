@@ -1,16 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 const ProductCard = (props) => {
   const { setCartItems, cartItems } = useCart();
+  const [quantity,setQuanity]=useState(0);
   function handleCart(id) {
-    const addedProduct = props.cover_edition_key === id ? props : null;
-     console.log('added product was',addedProduct)
-    setCartItems((prevValue) => {
-      return prevValue ? [...prevValue, addedProduct] : addedProduct;
+     const exists = cartItems.find(item => item.cover_edition_key === id);
+       const addedProduct = props.cover_edition_key === id ? props : null;
+     if(!exists){
+         const newProduct={
+
+          ...addedProduct,
+          quantity:1
+         }
+
+setCartItems((prevValue) => {
+      return prevValue ? [...prevValue, newProduct] : newProduct;
     });
+     }
+
+    
+  
+    
   }
+ 
+
+function handlePlus(id){
+
+  const updated=cartItems.map(item=>{
+    return item.cover_edition_key===id?{...item,quantity:item.quantity+1}:item;
+});
+
+  setCartItems(updated);
+}
+
+
+ 
+function handleMinus(id){
+   const updated=cartItems.map(item=>{
+    return item.cover_edition_key===id?{...item,quantity:quantity-1}:item;
+});
+  setCartItems(updated);
+}
+
   return (
     <div className="min-h-[400px]  flex flex-col items-center justify-around p-5 rounded shadow-xl gap-5  ">
       <div className="w-[200px] h-[240px] flex bg-white items-center justify-center ">
@@ -40,7 +73,14 @@ const ProductCard = (props) => {
         <Button className="btn-navy btn-navy:hover  px-2  ">
           <Link to={`/products/${props.cover_edition_key}`}>Book Detail</Link>
         </Button>
+     
+      
       </div>
+         <div className="w-full flex justify-between  ">
+  <Button className="bg-none" onClick={()=>handlePlus(props.cover_edition_key)}>+</Button>
+      <p>{quantity}</p>
+        <Button onClick={()=>handleMinus((props.cover_edition_key))}>-</Button>
+        </div>
     </div>
   );
 };

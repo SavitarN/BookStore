@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext";
 const Cart = () => {
   const {cartItems}=useCart(); 
 
-  console.log('cartItmes here',cartItems)
+
 
   return (
     <section className="w-full p-20 ">
@@ -23,7 +23,11 @@ const Cart = () => {
           className="w-full h-full object-contain "
         ></img>
         </div>
-    <p className="font-black truncate w-full p-10 border border-red-400">BookName:{item.title}</p>
+
+        <div>
+<p className="font-black truncate w-full p-10 border border-red-400">BookName:{item.title}</p>
+        </div>
+    
   
     </div>
   ))
