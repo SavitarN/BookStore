@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 const ProductCard = (props) => {
   const { cartItems,handleCart,handlePlus,handleMinus} = useCart();
- const productInCart=cartItems&&cartItems.find(item=>item.cover_edition_key===props.cover_edition_key);
+
+   const productInCart=cartItems&&cartItems.find(item=>item.cover_edition_key===props.cover_edition_key);
  const quantity=productInCart? productInCart.quantity:0;
- 
 
   return (
     <div className="min-h-[400px]  flex flex-col items-center justify-around p-5 rounded shadow-xl gap-5  ">
