@@ -102,7 +102,7 @@ const Products = () => {
             query={query}
           />
 
-          {modal && <CategorySelect  />}
+          {modal && <CategorySelect  setCategory={setCategory}/>}
         </div>
 
         {userLogged && (

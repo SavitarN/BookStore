@@ -9,7 +9,7 @@ export const useCart = () => useContext(CartContext);
 //value provided
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
- const[quanityNumber,setQuantityNumber]=useState(null);
+
  
 
  
@@ -39,7 +39,7 @@ function handlePlus(id){
  
 }
 
-console.log('cart items here',cartItems)
+
  
 function handleMinus(id){
    const updated=cartItems.map(item=>{
